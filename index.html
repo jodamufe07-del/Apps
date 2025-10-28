@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto YO: Life Gamified</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // To prevent FOUC (flash of unstyled content) or flash of incorrect theme
+      if (localStorage.getItem('userState') && JSON.parse(localStorage.getItem('userState')).theme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+
+      tailwind.config = {
+        darkMode: 'class', // Enable class-based dark mode
+        theme: {
+          extend: {
+            colors: {
+              // Dark Theme (default)
+              'brand-bg': '#101014',
+              'brand-surface': '#1a1a21',
+              'brand-primary': '#6a45ff',
+              'brand-secondary': '#ff6b00',
+              'brand-accent': '#00c4ff',
+              'brand-text-primary': '#e0e0ff',
+              'brand-text-secondary': '#a0a0c0',
+              // Light Theme
+              'brand-bg-light': '#f0f2f5',
+              'brand-surface-light': '#ffffff',
+              'brand-primary-light': '#5a38e5',
+              'brand-secondary-light': '#e66000',
+              'brand-accent-light': '#00a8d6',
+              'brand-text-primary-light': '#1f2937',
+              'brand-text-secondary-light': '#6b7280',
+            }
+          }
+        }
+      }
+    </script>
+  <style>
+    @keyframes toast-in {
+      from {
+        transform: translateY(100%) scale(0.9);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+    .toast-enter {
+      animation: toast-in 0.3s ease-out forwards;
+    }
+    .particle {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 1;
+        transition: transform 1s cubic-bezier(0.5, -0.5, 0.5, 1.5), opacity 1s ease-out;
+    }
+    @keyframes kpi-check-pop {
+      0% { transform: scale(0.8); }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .kpi-check:checked {
+      animation: kpi-check-pop 0.3s ease-out;
+    }
+    @keyframes sparkle-anim {
+      0% { transform: scale(0) rotate(0deg); opacity: 1; }
+      100% { transform: scale(1.5) rotate(90deg); opacity: 0; }
+    }
+    .sparkle {
+      position: absolute;
+      background-color: #FFD700; /* gold */
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkle-anim 0.7s ease-out forwards;
+      z-index: 10;
+    }
+    @keyframes pulse-subtle {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.03);
+        opacity: 1;
+      }
+    }
+    .reminder-bubble {
+        animation: pulse-subtle 3s ease-in-out infinite;
+    }
+    .tutorial-highlight {
+        position: fixed;
+        z-index: 9991;
+        border-radius: 8px;
+        box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
+    }
+    .tutorial-tooltip {
+        position: fixed;
+        z-index: 9992;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        max-width: 320px;
+        transition: all 0.3s ease-in-out;
+    }
+    .dark .tutorial-tooltip {
+        background-color: #1a1a21;
+        color: #e0e0ff;
+        border: 1px solid #6a45ff;
+    }
+    .light .tutorial-tooltip {
+        background-color: #ffffff;
+        color: #1f2937;
+        border: 1px solid #5a38e5;
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.27.0",
+    "recharts": "https://aistudiocdn.com/recharts@^2.13.0",
+    "marked": "https://aistudiocdn.com/marked@^16.4.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-brand-bg-light dark:bg-brand-bg text-brand-text-primary-light dark:text-brand-text-primary">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
